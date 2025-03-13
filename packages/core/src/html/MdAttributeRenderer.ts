@@ -161,6 +161,18 @@ export class MdAttributeRenderer {
   }
 
   /*
+   * Grids
+   */
+  processGridAttributes(node: MbNode) {
+    this.processSlotAttribute(node, 'searchable', true);
+  }
+
+  processCardAttributes(node: MbNode) {
+    this.processSlotAttribute(node, 'header', false);
+    this.processSlotAttribute(node, 'content', false);
+  }
+
+  /*
    * Dropdowns
    */
 

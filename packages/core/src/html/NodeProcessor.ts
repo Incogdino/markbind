@@ -177,110 +177,138 @@ export class NodeProcessor {
       if (_.has(warnConflictingAtributesMap, node.name)) { warnConflictingAtributesMap[node.name](node); }
 
       switch (node.name) {
-      case 'frontmatter':
-        this._processFrontmatter(node, context);
-        break;
-      case 'body':
-        // eslint-disable-next-line no-console
-        console.warn(`<body> tag found in ${node.attribs[ATTRIB_CWF]}. This may cause formatting errors.`);
-        break;
-      case 'include':
-        this.markdownProcessor.docId += 1; // used in markdown-it-footnotes
-        return processInclude(node, context, this.pageSources, this.variableProcessor,
-                              (text: string) => this.markdownProcessor.renderMd(text),
-                              (text: string) => this.markdownProcessor.renderMdInline(text),
-                              this.config, this.siteLinkManager);
-      case 'panel':
-        this.mdAttributeRenderer.processPanelAttributes(node);
-        return processPanelSrc(node, context, this.pageSources, this.config);
-      case 'question':
-        this.mdAttributeRenderer.processQuestion(node);
-        break;
-      case 'ul':
-        processUlNode(node, (text: string) => this.markdownProcessor.renderMdInline(text));
-        break;
-      case 'q-option':
-        this.mdAttributeRenderer.processQOption(node);
-        break;
-      case 'quiz':
-        this.mdAttributeRenderer.processQuiz(node);
-        break;
-      case 'popover':
-        this.mdAttributeRenderer.processPopoverAttributes(node);
-        return processPopoverSrc(node, context, this.pageSources, this.variableProcessor,
-                                 (text: string) => this.markdownProcessor.renderMd(text), this.config);
-      case 'tooltip':
-        this.mdAttributeRenderer.processTooltip(node);
-        break;
-      case 'modal':
-        this.processModal(node);
-        break;
-      case 'tab':
-      case 'tab-group':
-        this.mdAttributeRenderer.processTabAttributes(node);
-        break;
-      case 'box':
-        this.mdAttributeRenderer.processBoxAttributes(node);
-        break;
-      case 'dropdown':
-        this.mdAttributeRenderer.processDropdownAttributes(node);
-        break;
-      case 'thumbnail':
-        this.mdAttributeRenderer.processThumbnailAttributes(node);
-        break;
-      case 'page-nav':
-        this.pageNavProcessor.renderPageNav(node);
-        break;
-      case 'page-nav-print':
-        PageNavProcessor.transformPrintContainer(node);
-        break;
-      case 'site-nav':
-        renderSiteNav(node);
-        break;
-      case 'mb-temp-footnotes':
-        this.footnoteProcessor.processMbTempFootnotes(node);
-        break;
-      case 'script':
-      case 'style':
-        processScriptAndStyleTag(node, this.userScriptsAndStyles);
-        break;
-      case 'scroll-top-button':
-        this.mdAttributeRenderer.processScrollTopButtonAttributes(node);
-        break;
-      case 'a-point':
-        this.mdAttributeRenderer.processAnnotationPointAttributes(node);
-        break;
-      case 'code':
-        setCodeLineNumbers(node, this.config.codeLineNumbers);
-        // fall through
-      case 'annotation': // Annotations are added automatically by KaTeX when rendering math formulae.
-      case 'eq': // markdown-it-texmath html tag
-      case 'eqn': // markdown-it-texmath html tag
-      case 'thumb': // image
-        /*
-         * These are not components from MarkBind Vue components.
-         * We have to add 'v-pre' to let Vue know to ignore this tag and not compile it.
-         *
-         * Although there won't be warnings if we use production Vue, it is still good to add this.
-         */
-        if (!_.has(node.attribs, 'v-pre')) { node.attribs['v-pre'] = ''; }
-        break;
-      case 'pic':
-      case 'annotate':
-        if (_.has(node.attribs, 'lazy')
-            && !(_.has(node.attribs, 'width') || _.has(node.attribs, 'height'))) {
-          const filePath = context.callStack.length > 0 ? context.callStack[context.callStack.length - 1]
-            : context.cwf;
-          logger.warn(
-            `${filePath} --- `
-              + 'Both width and height are not specified when using lazy loading in the file and'
-              + ' it might cause shifting in page layouts. '
-              + 'To ensure proper functioning of lazy loading, please specify either one or both.\n',
+        case 'frontmatter':
+          this._processFrontmatter(node, context);
+          break;
+        case 'body':
+          // eslint-disable-next-line no-console
+          console.warn(
+            `<body> tag found in ${node.attribs[ATTRIB_CWF]}. This may cause formatting errors.`
           );
-        }
-        break;
-      default:
-        break;
+          break;
+        case 'include':
+          this.markdownProcessor.docId += 1; // used in markdown-it-footnotes
+          return processInclude(
+            node,
+            context,
+            this.pageSources,
+            this.variableProcessor,
+            (text: string) => this.markdownProcessor.renderMd(text),
+            (text: string) => this.markdownProcessor.renderMdInline(text),
+            this.config,
+            this.siteLinkManager
+          );
+        case 'panel':
+          this.mdAttributeRenderer.processPanelAttributes(node);
+          return processPanelSrc(node, context, this.pageSources, this.config);
+        case 'question':
+          this.mdAttributeRenderer.processQuestion(node);
+          break;
+        case 'ul':
+          processUlNode(node, (text: string) =>
+            this.markdownProcessor.renderMdInline(text)
+          );
+          break;
+        case 'q-option':
+          this.mdAttributeRenderer.processQOption(node);
+          break;
+        case 'quiz':
+          this.mdAttributeRenderer.processQuiz(node);
+          break;
+        case 'popover':
+          this.mdAttributeRenderer.processPopoverAttributes(node);
+          return processPopoverSrc(
+            node,
+            context,
+            this.pageSources,
+            this.variableProcessor,
+            (text: string) => this.markdownProcessor.renderMd(text),
+            this.config
+          );
+        case 'tooltip':
+          this.mdAttributeRenderer.processTooltip(node);
+          break;
+        case 'modal':
+          this.processModal(node);
+          break;
+        case 'tab':
+        case 'tab-group':
+          this.mdAttributeRenderer.processTabAttributes(node);
+          break;
+        case 'box':
+          this.mdAttributeRenderer.processBoxAttributes(node);
+          break;
+        case 'grid':
+          this.mdAttributeRenderer.processGridAttributes(node);
+          break;
+        case 'card':
+          this.mdAttributeRenderer.processCardAttributes(node);
+          break;
+        case 'dropdown':
+          this.mdAttributeRenderer.processDropdownAttributes(node);
+          break;
+        case 'thumbnail':
+          this.mdAttributeRenderer.processThumbnailAttributes(node);
+          break;
+        case 'page-nav':
+          this.pageNavProcessor.renderPageNav(node);
+          break;
+        case 'page-nav-print':
+          PageNavProcessor.transformPrintContainer(node);
+          break;
+        case 'site-nav':
+          renderSiteNav(node);
+          break;
+        case 'mb-temp-footnotes':
+          this.footnoteProcessor.processMbTempFootnotes(node);
+          break;
+        case 'script':
+        case 'style':
+          processScriptAndStyleTag(node, this.userScriptsAndStyles);
+          break;
+        case 'scroll-top-button':
+          this.mdAttributeRenderer.processScrollTopButtonAttributes(node);
+          break;
+        case 'a-point':
+          this.mdAttributeRenderer.processAnnotationPointAttributes(node);
+          break;
+        case 'code':
+          setCodeLineNumbers(node, this.config.codeLineNumbers);
+        // fall through
+        case 'annotation': // Annotations are added automatically by KaTeX when rendering math formulae.
+        case 'eq': // markdown-it-texmath html tag
+        case 'eqn': // markdown-it-texmath html tag
+        case 'thumb': // image
+          /*
+           * These are not components from MarkBind Vue components.
+           * We have to add 'v-pre' to let Vue know to ignore this tag and not compile it.
+           *
+           * Although there won't be warnings if we use production Vue, it is still good to add this.
+           */
+          if (!_.has(node.attribs, 'v-pre')) {
+            node.attribs['v-pre'] = '';
+          }
+          break;
+        case 'pic':
+        case 'annotate':
+          if (
+            _.has(node.attribs, 'lazy') &&
+            !(_.has(node.attribs, 'width') || _.has(node.attribs, 'height'))
+          ) {
+            const filePath =
+              context.callStack.length > 0
+                ? context.callStack[context.callStack.length - 1]
+                : context.cwf;
+            logger.warn(
+              `${filePath} --- ` +
+                'Both width and height are not specified when using lazy loading in the file and' +
+                ' it might cause shifting in page layouts. ' +
+                'To ensure proper functioning of lazy loading, please specify either one or both.\n'
+            );
+          }
+          break;
+        default:
+          break;
       }
     } catch (error) {
       logger.error(error);

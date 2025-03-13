@@ -33,11 +33,15 @@ import popover from './Popover.vue';
 import tooltip from './Tooltip.vue';
 import modal from './Modal.vue';
 import scrollTopButton from './ScrollTopButton.vue';
+import card from './grid/Card.vue';
+import grid from './grid/Grid.vue';
 
 const components = {
   box,
   breadcrumb,
   dropdown,
+  grid,
+  card,
   navbar,
   panel,
   annotate,
@@ -62,8 +66,8 @@ const components = {
   popover,
   tooltip,
   modal,
-  'VPopover': Dropdown,
-  'VTooltip': Tooltip,
+  VPopover: Dropdown,
+  VTooltip: Tooltip,
   scrollTopButton,
 };
 
