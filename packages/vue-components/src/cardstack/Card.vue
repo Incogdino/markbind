@@ -1,5 +1,5 @@
 <template>
-    <div :class="`col-md-${computedBlock}`" v-show="computeDisabled">
+    <div :class="`col-md-${computedBlock}`" v-show="!computeDisabled">
         <div class="article-container" :style="computedWidth">
             <div class="card-header-container">
                 <p v-if="!src"> {{ header }}</p>
@@ -52,7 +52,8 @@ export default {
             return Math.floor(12 / block);
         },
         computeDisabled() {
-            return this.disabled || !this.disableCard;
+            const isEmptyContent = this.header === '' && this.$slots.default === undefined;
+            return this.disabled || this.disableCard || isEmptyContent;
         },
         computedTags() {
             return this.tag ? this.tag.split(",").map(tag => tag.trim()) : [];
