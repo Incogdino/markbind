@@ -59,6 +59,8 @@ export default {
                     if (!searchTarget.match(regex)) {
                         child.$props.disableCard = true;
                         break;
+                    } else {
+                        child.$props.disableCard = false;
                     }
                 }
             });
