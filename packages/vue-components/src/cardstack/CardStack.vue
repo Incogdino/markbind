@@ -47,7 +47,7 @@ export default {
                 }
 
                 if(this.value == '' && !child.$props.disabled) {
-                    child.$props.disableCard = false;
+                    child.$data.disableCard = false;
                     return;
                 }
 
@@ -57,10 +57,10 @@ export default {
                 const searchTarget = tags.join(' ') + keywords.join(' ') + header;
                 for (const regex of regexes) {
                     if (!searchTarget.match(regex)) {
-                        child.$props.disableCard = true;
+                        child.$data.disableCard = true;
                         break;
                     } else {
-                        child.$props.disableCard = false;
+                        child.$data.disableCard = false;
                     }
                 }
             });

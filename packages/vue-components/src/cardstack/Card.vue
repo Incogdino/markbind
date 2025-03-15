@@ -2,7 +2,7 @@
     <div :class="`col-md-${computedBlock}`" v-show="!computeDisabled">
         <div class="article-container" :style="computedWidth">
             <div class="card-header-container">
-                <p v-if="!src"> {{ header }}</p>
+                <p> {{ header }}</p>
             </div>
             
             <div class="card-content-container">
@@ -31,14 +31,16 @@ export default {
             type: Boolean,
             default: false,
         },
-        disableCard: {
-            type: Boolean,
-            default: false,
-        },
         keywords: {
             type: String,
             default: '',
         }
+    },
+    data() {
+        return {
+            isMounted: false,
+            disableCard: false,
+        };
     },
     components: {
     },
