@@ -2,17 +2,6 @@
     <div :class="`col-md-${computedBlock}`" v-show="computeDisabled">
         <div class="article-container" :style="computedWidth">
             <div class="card-header-container">
-                <img 
-                    v-if="src" 
-                    :src="src" 
-                    width="100" 
-                    height="100"
-                    :alt="alt"
-                    :width="computedWidth"
-                    :height="computedHeight"
-                    :loading="computedLoadType"
-                    class="annotate-image"
-                    @load.once="computeWidthAndHeight">
                 <p v-if="!src"> {{ header }}</p>
             </div>
             
@@ -30,15 +19,7 @@
 <script>
 export default {
     props: {
-        src: {
-            type: String,
-            default: null,
-        },
         header: {
-            type: String,
-            default: '',
-        },
-        alt: {
             type: String,
             default: '',
         },
