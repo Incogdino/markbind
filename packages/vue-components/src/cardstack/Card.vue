@@ -21,7 +21,7 @@
             </div>
             <br>
             <div v-if="hasTag" class="tag-container">
-                <p>Tags: {{ formatedTags }}</p>
+                <p :title=formatedTags class="truncate">Tags: {{ formatedTags }}</p>
             </div>
         </div>
     </div>
