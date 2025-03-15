@@ -168,7 +168,6 @@ export class MdAttributeRenderer {
   }
 
   processCardAttributes(node: MbNode) {
-    this.processSlotAttribute(node, 'header', false);
     this.processSlotAttribute(node, 'content', false);
   }
 

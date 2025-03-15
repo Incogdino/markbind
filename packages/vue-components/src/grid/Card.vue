@@ -13,15 +13,15 @@
                     :loading="computedLoadType"
                     class="annotate-image"
                     @load.once="computeWidthAndHeight">
-                <slot v-if="!src" name="header"></slot>
+                <p v-if="!src"> {{ header }}</p>
             </div>
             
             <div class="card-content-container">
                 <slot></slot>                
             </div>
-
+            <br>
             <div v-if="hasTag" class="tag-container">
-                    <p>Tags: {{ formatedTags }}</p>
+                <p>Tags: {{ formatedTags }}</p>
             </div>
         </div>
     </div>
@@ -118,7 +118,9 @@ export default {
         flex-direction: column;
         justify-content: center;
         margin: 0;
-        padding: 10px;
+        padding: 0px;
+        width: 100%;
+        word-break: break-word;
     }
 
     .card-header-container {
@@ -127,10 +129,10 @@ export default {
         justify-content: center;
         align-items: center;
         top: 10;
+        width: 100%;
         margin: 0;
         padding: 0px;
     }
-
 
     .card-header-container > * {
         font-size: 100%;
@@ -145,9 +147,10 @@ export default {
         white-space: nowrap;
     }
 
-    .tag-container > p {
+    .tag-container > * {
         font-size: 14px;
         color: rgba(128, 128, 128, 0.638);
         margin: 0;
+        overflow: hidden;
     }
 </style>

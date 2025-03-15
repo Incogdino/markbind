@@ -52,9 +52,9 @@ export default {
                 }
 
                 const tags = child.computedTags;
-                const keywords = child.computedKeywords;   
-                const searchTarget = tags.join(' ') + keywords.join(' ');
-                
+                const keywords = child.computedKeywords;
+                const header = child.$props.header;
+                const searchTarget = tags.join(' ') + keywords.join(' ') + header;
                 for (const regex of regexes) {
                     if (!searchTarget.match(regex)) {
                         child.$props.disableCard = true;
@@ -101,8 +101,9 @@ export default {
 
 .grid-container {
     background-color: rgb(231, 231, 231);
-    border-radius: 1%/2%;
+    border-radius: 8px;
     padding: 20px;
+    margin: 10px 0px 10px 0px;
 }
 
 .container {
@@ -113,6 +114,6 @@ export default {
 
 .form-control {
     min-width: 12.7em;
-    max-width: 25.4em; /* twice of min-width, to accommodate a range of lengths */
+    max-width: 25.4em;
 }
 </style>
