@@ -49,8 +49,9 @@ export default {
             const block = this.$parent.$props.blocks;
             return Math.floor(12 / block);
         },
-        computeDisabled() {
-            const isEmptyContent = this.header === '' && this.$slots.default === undefined;
+        computeDisabled() { 
+            console.log(this.$slots)
+            const isEmptyContent = this.$slots.header === undefined && this.$slots.default === undefined;
             return this.disabled || this.disableCard || isEmptyContent;
         },
         computedTags() {

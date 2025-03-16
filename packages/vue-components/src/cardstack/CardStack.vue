@@ -1,6 +1,6 @@
 <template>
     <div class="grid-container">
-        <span v-if="isSearchable" class="search-bar">
+        <span v-if=this.searchable class="search-bar">
             <template>
                 <input
                     v-model="value"
@@ -72,7 +72,7 @@ export default {
     },
     data() {
         return {
-            isSearchable: false,
+            // isSearchable: false,
             value: '',
         };
         
@@ -80,7 +80,7 @@ export default {
     mounted() {
         this.isMounted = true;
 
-        this.isSearchable = this.$slots.searchable !== undefined && this.$slots.searchable[0].text !== "false";
+        // this.isSearchable = this.$slots.searchable !== undefined && this.$slots.searchable[0].text !== "false";
     },
 }
 
