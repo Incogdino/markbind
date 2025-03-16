@@ -239,8 +239,8 @@ export class NodeProcessor {
           this.mdAttributeRenderer.processBoxAttributes(node);
           break;
         case 'cardstack':
-          this.mdAttributeRenderer.processGridAttributes(node);
-          break;
+          this.mdAttributeRenderer.processCardStackAttributes(node);
+        break;
         case 'card':
           this.mdAttributeRenderer.processCardAttributes(node);
           break;

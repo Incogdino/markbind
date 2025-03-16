@@ -161,10 +161,9 @@ export class MdAttributeRenderer {
   }
 
   /*
-   * Grids
+   * Card Stack
    */
-  processGridAttributes(node: MbNode) {
-    this.processSlotAttribute(node, 'searchable', true);
+  processCardStackAttributes(node: MbNode) {
   }
 
   processCardAttributes(node: MbNode) {

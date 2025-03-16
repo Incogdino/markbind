@@ -30,6 +30,10 @@ export default {
         placeholder: {
             type: String,
             default: 'Search',
+        },
+        searchable: {
+            type: Boolean,
+            default: true,
         }
     },
     computed: {
