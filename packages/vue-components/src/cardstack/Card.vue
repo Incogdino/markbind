@@ -2,7 +2,7 @@
     <div :class="`col-md-${computedBlock}`" v-show="!computeDisabled">
         <div class="article-container" :style="computedWidth">
             <div class="card-header-container">
-                <p> {{ header }}</p>
+                <slot name="header"></slot>
             </div>
             
             <div class="card-content-container">
@@ -19,10 +19,6 @@
 <script>
 export default {
     props: {
-        header: {
-            type: String,
-            default: '',
-        },
         tag: {
             type: String,
             default: '',
@@ -116,11 +112,6 @@ export default {
         width: 100%;
         margin: 0;
         padding: 0px;
-    }
-
-    .card-header-container > * {
-        font-size: 100%;
-        font-weight: bold;
     }
 
     .tag-container {
