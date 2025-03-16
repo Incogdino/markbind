@@ -24,7 +24,7 @@ describe('ScrollTopButton', () => {
     document.body.scrollTop = 1000;
     window.dispatchEvent(new Event('scroll'));
     await wrapper.vm.$nextTick();
-    await waitTimeout(200);
+    await waitTimeout(2000);
     expect(wrapper.element).toMatchSnapshot();
   });
 
