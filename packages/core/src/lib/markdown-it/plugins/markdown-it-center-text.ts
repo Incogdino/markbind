@@ -29,7 +29,7 @@ import MarkdownIt from 'markdown-it';
 import StateInline from 'markdown-it/lib/rules_inline/state_inline';
 
 // Delimiter markers are non-negative character codes, so negative sentinels
-// used not to collide with markers used by other inline rules
+// used not to collide with markers used by other inline rules.
 const CENTERTEXT_OPEN_MARKER = -1;
 const CENTERTEXT_CLOSE_MARKER = -2;
 
